@@ -1,21 +1,16 @@
-// async function getData() {
-// 	return new Promise((resolve, reject) => {
-// 		Papa.parse('data.csv', {
-// 			header:true,
-// 			complete:(results) => {				
-// 				resolve(results.data);
-// 			}
-// 		});
-// 	});
-// }
-
-// let data = await getData();
-
+function onCircleOver(){
+    let myImage = document.getElementById("testImage");
+    myImage.style.opacity = 1;    
+}
+function onCircleOut(){
+    let myImage = document.getElementById("testImage");
+    myImage.style.opacity = 0;    
+}
 
 // initialize map
 let map = L.map('map', {
     center: [48.14364, 17.113266],
-    zoom: 14,
+    zoom: 13,
     minZoom: 13,
     maxZoom: 16,
 });
@@ -35,25 +30,30 @@ let Stadia_StamenTonerLite = L.tileLayer('https://tiles.stadiamaps.com/tiles/sta
 }).addTo(map);
 
 // let marker = L.marker([51.5, -0.09]).addTo(map);
-let circle = L.circle([48.136709, 17.117214], {
+// cvernovka point
+let circle = L.circle([48.185388, 17.133865], {
     color: 'black',
-    fillColor: 'rgb(0, 0, 0)',
+    fillColor: 'rgb(255, 196, 0)',
     fillOpacity: 0.5,
-    radius: 5
+    radius: 50
 }).addTo(map);
 
-// path object
-let path = L.polyline([
-    [48.139802, 17.1173],
-    [48.13986, 17.122364],
-    [48.145702, 17.123737]
-    ], {
-        color: 'black',
-        weight: 5,
-        stroke: true,
-        lineJoin: 'round',
+circle.on("mouseover", onCircleOver);
+circle.on("mouseout", onCircleOut);
 
-    }).addTo(map);
+
+// path object
+// let path = L.polyline([
+//     [48.139802, 17.1173],
+//     [48.13986, 17.122364],
+//     [48.145702, 17.123737]
+//     ], {
+//         color: 'black',
+//         weight: 5,
+//         stroke: true,
+//         lineJoin: 'round',
+
+//     }).addTo(map);
 // marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
 // circle.bindPopup("I am a circle.");
 // let popup = L.popup()
@@ -63,13 +63,13 @@ let path = L.polyline([
 //     .openOn(map);
 
 // onclick show latlong
-let popup = L.popup();
+// let popup = L.popup();
 
-function onMapClick(e) {
-    popup
-        .setLatLng(e.latlng)
-        .setContent("You clicked the map at " + e.latlng.toString())
-        .openOn(map);
-}
+// function onMapClick(e) {
+//     popup
+//         .setLatLng(e.latlng)
+//         .setContent("You clicked the map at " + e.latlng.toString())
+//         .openOn(map);
+// }
 
-map.on('click', onMapClick);
+// map.on('click', onMapClick);
