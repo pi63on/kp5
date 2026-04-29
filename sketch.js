@@ -1,44 +1,119 @@
-choices = [1, 2, 3, 4];
+let leafletMap;
+let canvas;
+let agent;
+
+let places = [
+  {
+    name: "VŠVU Hviezdoslavovo námestie",
+    lat: 48.141737,
+    lng: 17.107255,
+  },
+  {
+    name: "VŠVU Drotárska",
+    lat: 48.1556,
+    lng: 17.0857,
+  },
+  {
+    name: "VŠVU Koceľova",
+    lat: 48.1542,
+    lng: 17.1318,
+  },
+  {
+    name: "Moja izba",
+    lat:48.183736 ,
+    lng:  17.132237 
+  },
+  {
+    name: 'bunt',
+    lat: 48.129502 ,
+    lng: 17.123586
+  },
+  {
+    name: 'cvicit',
+    lat: 48.144523 ,
+    lng: 17.102153  
+  },
+  {
+    name: 'projektik',
+    lat:  48.137734 ,
+    lng: 17.117300 
+  },
+  {
+    name: 'business',
+    lat:  48.150285 ,
+    lng: 17.109144  
+  },
+
+];
 
 function setup() {
-  createCanvas(100*4, 100*4);
-  background(220);
-  textSize(11);
-  // frameRate(20);
+  canvas = createCanvas(windowWidth, windowHeight);
+  canvas.parent("p5-layer");
+
+  leafletMap = L.map("map").setView([48.1486, 17.1077], 13);
+
+  let Stadia_StamenTonerLite = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}{r}.{ext}', {
+	minZoom: 0,
+	maxZoom: 20,
+	attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	ext: 'png'
+    }).addTo(leafletMap);
+  
+  agent = new Mover(width/2, height/2);
 }
 
 function draw() {
-  background(220);
-  push();
-  translate(20, 20);
-  stroke('rgb(248,248,0)');
-  for (let t=0; t<5000; t++){
-    x=map(sin(2*t), -1, 1, 0, width-40);
-    y=map(cos(4*t + frameCount*PI/100), -1, 1, 0, height-40);
-    let c = map(dist(mouseX, mouseY, x, y), 0, 500, 1, 0);
-    
-    stroke(255, 200 + 55*c, 100*c);
-    circle(x, y, 1);
-  }
-  pop();
-  text('x = sin(' + 2 + 't)', 20, 15);
-  text('y = cos(' + 4 + 't)', width - 70, 15);
-  
-  
-}
+    clear();
 
-function mouseClicked(){
-  if (lissaFlag){
-    frameRate(20);
-  } else {
-    frameRate(10);
-  }
-  
-}
-
-function keyPressed() {
-    if (key == 'f') {
-    let fs = fullscreen();
-    fullscreen(!fs);
+    for (let place of places){
+        let myPoint = latLngToScreen(place.lat, place.lng);
+        
+        stroke('blue')
+        // line(myPoint.x, myPoint.y, mouseX, mouseY);
+        let myDist = dist(myPoint.x, myPoint.y, mouseX, mouseY);
+        if (myDist < 60){
+            agent.applyForce(agent.seek(createVector(myPoint.x, myPoint.y)));
+        } else {
+            // agent.applyForce(agent.seek(createVector(mouseX, mouseY)));
+        }
+        drawPlace(myPoint.x, myPoint.y, place);
     }
+    
+    agent.checkEdges();
+    agent.update();
+    agent.show();
+
+    noFill();
+    stroke('black');
+    circle(mouseX, mouseY, 40);
+
+    push();
+    noStroke();
+    fill('black');
+    textSize(40);
+    text("it's go time: " + parseInt(map((frameCount/10) % 60*60, 0 , 60*60, 0, 12)) + ":" + parseInt(map((frameCount/10) % 60*60, 0 , 60*60, 0, 60)) , 100, 100);
+    pop();
+
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+
+function latLngToScreen(lat, lng) {
+  return leafletMap.latLngToContainerPoint([lat, lng]);
+}
+
+function drawPlace(x, y, place) {
+  let r = 24 + sin(frameCount * 0.05) * 6;
+
+  push();
+  stroke('blue')
+  noFill();
+  circle(x, y, r);
+
+  noStroke(), fill('blue');
+  textSize(14);
+  text(place.name, x + 18, y - 10);
+  pop();
 }

@@ -1,22 +1,28 @@
+.borderimage {
+	BORDER-RIGHT: white 1px solid; BORDER-TOP: white 1px solid; BORDER-LEFT: white 1px solid; BORDER-BOTTOM: white 1px solid
+}
 html, body {
-  margin: 0;
-  padding: 0;
-}
-canvas {
-  display: block;
-}
-#container {
-  margin-top: 10vh;
-  display: flex;
-  justify-content: space-evenly;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
-#map { 
-  height: 600px;
-  width: 1000px;
- }
-#testImage {
-  opacity: 0;
-  /* width: 100px; */
-  height: 600px;
+#map {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+#p5-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+#marketa {
+    position: absolute;
+    inset: 10%;
+    z-index: 12;
 }

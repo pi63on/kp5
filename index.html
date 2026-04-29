@@ -1,31 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.js"></script>
-    
-    
-    
-    <link rel="stylesheet" type="text/css" href="style.css">
+
+<head>
+    <meta charset="utf-8">
+    <title>webtries</title>
+    <link href="style.css" rel="stylesheet" />
+    <script>
+        var newWindow = null;
+        function openWindow(contentURL, windowName, windowWidth, windowHeight) {
+            widthHeight = 'height=' + windowHeight + ',scrollbars' + ',width=' + windowWidth;
+            newWindow = window.open(contentURL, windowName, widthHeight, 'left=500', 'top=1000', 'location=no'
+            );
+            newWindow.focus()
+        }
+    </script>
+    <script>
+        function openCenteredPopup(url, width, height, windowName = "customPopup") {
+            // Calculate left and top positions to center the popup
+            const left = - screen.availWidth ;
+            const top = (screen.availHeight - height) / 2;
+
+            // Define popup features (comma-separated, no spaces!)
+            const features = [
+                `width=${width}`,
+                `height=${height}`,
+                `left=${left}`,
+                `top=${top}`,
+                "toolbar=no", // Hide toolbar
+                "location=no", // Hide address bar
+                "status=no", // Hide status bar
+                "menubar=no", // Hide menu bar
+                "scrollbars=yes", // Show scrollbars if needed
+                "resizable=yes" // Allow resizing
+            ].join(",");
+
+            // Open the popup
+            return window.open(url, windowName, features);
+        }
+    </script>
+
+    <script language="JavaScript1.2">
+        /* Highlight Image Script II- Dynamic Drive (www.dynamicdrive.com) */
+        function borderit(which, color) {//if IE 4+ or NS 6+ 
+            if (document.all || document.getElementById) { which.style.borderColor = color }
+        }
+    </script>
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""/>
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""></script>
-    <meta charset="utf-8" />
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
-  </head>
-  <body>
-    <div id="container">
-      <div id="map"></div>
-      <div class = "instances">
-        <img id="testImage" src="DSCN2601.JPG">
-      </div>
-    </div>
-    <main>
-    </main>
-    <!-- <script src="sketch.js"></script> -->
-    <script src="script.js"></script>
-  </body>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.13/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.13/lib/addons/p5.sound.min.js"></script>
+
+</head>
+
+<body>
+    <a id="marketa" title="A busy person, my dad said, it's hard to catch me"
+        href="javascript:openCenteredPopup('popup.html',500,400,'myNewWindow')">
+        <img class="borderimage" onmouseover="borderit(this,'blue')" onmouseout="borderit(this,'white')"
+            src="images/whoshouldibe.jpg" width="300" style="border-color: white;">
+        <br>
+        <h3>full schedule? always something to do?</h3>
+    </a>
+    <div id="map"></div>
+    <div id="p5-layer"></div>
+
+    <!-- <script src="script.js"></script> -->
+    <script src="mover.js"></script>
+    <script src="sketch.js"></script>
+</body>
+
 </html>
