@@ -73,10 +73,10 @@ function draw() {
         let myDist = dist(myPoint.x, myPoint.y, mouseX, mouseY);
         if (myDist < 60){
             agent.applyForce(agent.seek(createVector(myPoint.x, myPoint.y)));
+            drawPlace(myPoint.x, myPoint.y, place);
         } else {
             // agent.applyForce(agent.seek(createVector(mouseX, mouseY)));
         }
-        drawPlace(myPoint.x, myPoint.y, place);
     }
     
     agent.checkEdges();
@@ -87,12 +87,6 @@ function draw() {
     stroke('black');
     circle(mouseX, mouseY, 40);
 
-    push();
-    noStroke();
-    fill('black');
-    textSize(40);
-    text("it's go time: " + parseInt(map((frameCount/10) % 60*60, 0 , 60*60, 0, 12)) + ":" + parseInt(map((frameCount/10) % 60*60, 0 , 60*60, 0, 60)) , 100, 100);
-    pop();
 
 }
 
@@ -105,7 +99,7 @@ function latLngToScreen(lat, lng) {
 }
 
 function drawPlace(x, y, place) {
-  let r = 24 + sin(frameCount * 0.05) * 6;
+  let r = 6;
 
   push();
   stroke('blue')

@@ -1,5 +1,5 @@
 .borderimage {
-	BORDER-RIGHT: white 1px solid; BORDER-TOP: white 1px solid; BORDER-LEFT: white 1px solid; BORDER-BOTTOM: white 1px solid
+  border: blue 1px solid;
 }
 html, body {
     overflow: hidden;
@@ -22,7 +22,13 @@ html, body {
 }
 
 #marketa {
-    position: absolute;
-    inset: 10%;
-    z-index: 12;
+  position: absolute;
+  inset: 10%;
+  z-index: 12;
+}
+
+#classIm {
+  position: absolute;
+  inset: 10%;
+  z-index: 12;
 }
