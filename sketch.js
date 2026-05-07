@@ -47,6 +47,54 @@ let places = [
 
 ];
 
+let locations = [
+    [   
+        'odraz v luke',
+        48.158547007735805,
+        17.08357049852339
+    ],
+    [   
+        'dvojtien',
+        48.16047868364396,
+        17.122342586517338
+    ],
+    [
+        'obchodna',
+        48.14888772654541,
+        17.113180160522464
+    ],
+    [
+        'corner of the eye',
+        48.17564069390013,
+        17.12328672409058
+    ],
+    [
+        'tunnel',
+        48.17608411529678,
+        17.12354421615601
+    ],
+    [
+        'incoming light',
+        48.186467661779595,
+        17.13624715805054
+    ],
+    [
+        'tree',
+        48.1851948607939,
+        17.137899398803714
+    ],
+    [
+        'washing with light',
+        48.183993536487385,
+        17.13255643844605
+    ],
+    [
+        'cubus top lease',
+        48.15312429910389,
+        17.118201401645358
+    ]
+]
+
 function setup() {
   canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent("p5-layer");
@@ -66,19 +114,18 @@ function setup() {
 function draw() {
     clear();
 
-    for (let i = 0 ; i< places.length; i++){
-        place = places[i]
-        let myPoint = latLngToScreen(place.lat, place.lng);
+    for (let i = 0 ; i< locations.length; i++){
+        place = locations[i]
+        let myPoint = latLngToScreen(place[1], place[2]);
         let myDist = dist(myPoint.x, myPoint.y, mouseX, mouseY);
 
         stroke('blue');
 
         if (myDist < 30){
             agent.applyForce(agent.seek(createVector(myPoint.x, myPoint.y))); // move marker
-            drawPlace(myPoint.x, myPoint.y, place);
             currentPlace = i;
-            console.log(currentPlace);
-          } 
+          }
+          drawPlace(myPoint.x, myPoint.y, place);
     }
     
     // marker behavior
@@ -110,17 +157,39 @@ function drawPlace(x, y, place) {
 
     noStroke(), fill('blue');
     textSize(14);
-    text(place.name, x + 18, y - 10);
+    text(place[0], x + 18, y - 10);
   pop();
 }
 
 function mousePressed(){
-  console.log('mouse presed', currentPlace);
   if (currentPlace == NaN){
-    console.log('is nan');
   }else if (!(isNaN(currentPlace))){
-    console.log('before  display', currentPlace);
     let myAdder = currentPlace;
-    document.getElementById('borderimage').src = 'images/' + myAdder + '.png';
+    document.getElementById('borderimage').src = 'images/' + myAdder + '.jpg';
+    document.getElementById('imageText').innerHTML = locations[myAdder][0];
+    openCenteredPopup('videopage.html',500,400,'myNewWindow')
   }
 }
+
+function openCenteredPopup(url, width, height, windowName = "customPopup") {
+            // Calculate left and top positions to center the popup
+            const left = - screen.availWidth;
+            const top = (screen.availHeight - height) / 2;
+
+            // Define popup features (comma-separated, no spaces!)
+            const features = [
+                `width=${width}`,
+                `height=${height}`,
+                `left=${left}`,
+                `top=${top}`,
+                "toolbar=no", // Hide toolbar
+                "location=no", // Hide address bar
+                "status=no", // Hide status bar
+                "menubar=no", // Hide menu bar
+                "scrollbars=yes", // Show scrollbars if needed
+                "resizable=yes" // Allow resizing
+            ].join(",");
+
+            // Open the popup
+            return window.open(url, windowName, features);
+        }
