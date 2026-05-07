@@ -1,4 +1,4 @@
-.borderimage {
+#borderimage {
   border: blue 1px solid;
 }
 html, body {
@@ -25,10 +25,12 @@ html, body {
   position: absolute;
   inset: 10%;
   z-index: 12;
+  pointer-events: none;
 }
 
 #classIm {
   position: absolute;
   inset: 10%;
   z-index: 12;
+  pointer-events: none;
 }

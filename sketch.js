@@ -1,6 +1,7 @@
 let leafletMap;
 let canvas;
 let agent;
+let currentPlace;
 
 let places = [
   {
@@ -9,7 +10,7 @@ let places = [
     lng: 17.107255,
   },
   {
-    name: "VŠVU Drotárska",
+    name: "Odraz v lúke",
     lat: 48.1556,
     lng: 17.0857,
   },
@@ -65,29 +66,30 @@ function setup() {
 function draw() {
     clear();
 
-    for (let place of places){
+    for (let i = 0 ; i< places.length; i++){
+        place = places[i]
         let myPoint = latLngToScreen(place.lat, place.lng);
-        
-        stroke('blue')
-        // line(myPoint.x, myPoint.y, mouseX, mouseY);
         let myDist = dist(myPoint.x, myPoint.y, mouseX, mouseY);
-        if (myDist < 60){
-            agent.applyForce(agent.seek(createVector(myPoint.x, myPoint.y)));
+
+        stroke('blue');
+
+        if (myDist < 30){
+            agent.applyForce(agent.seek(createVector(myPoint.x, myPoint.y))); // move marker
             drawPlace(myPoint.x, myPoint.y, place);
-        } else {
-            // agent.applyForce(agent.seek(createVector(mouseX, mouseY)));
-        }
+            currentPlace = i;
+            console.log(currentPlace);
+          } 
     }
     
+    // marker behavior
     agent.checkEdges();
     agent.update();
     agent.show();
 
+    // show mouse position
     noFill();
     stroke('black');
-    circle(mouseX, mouseY, 40);
-
-
+    circle(mouseX, mouseY, 60);
 }
 
 function windowResized() {
@@ -102,12 +104,23 @@ function drawPlace(x, y, place) {
   let r = 6;
 
   push();
-  stroke('blue')
-  noFill();
-  circle(x, y, r);
+    stroke('blue')
+    noFill();
+    circle(x, y, r);
 
-  noStroke(), fill('blue');
-  textSize(14);
-  text(place.name, x + 18, y - 10);
+    noStroke(), fill('blue');
+    textSize(14);
+    text(place.name, x + 18, y - 10);
   pop();
+}
+
+function mousePressed(){
+  console.log('mouse presed', currentPlace);
+  if (currentPlace == NaN){
+    console.log('is nan');
+  }else if (!(isNaN(currentPlace))){
+    console.log('before  display', currentPlace);
+    let myAdder = currentPlace;
+    document.getElementById('borderimage').src = 'images/' + myAdder + '.png';
+  }
 }
