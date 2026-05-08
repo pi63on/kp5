@@ -1,0 +1,12 @@
+html, body {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: black;
+}
+
+.click-vid{
+    height: 50%;
+    margin-left: 25%;
+}
