@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="video-style.css">
+    </head>
+    <body>
+        <video loop id="myVideo1" class="click-vid">
+            <source src="../stitched/DSCN2944_cubus.mp4"  type="video/mp4">
+        </video>
+        <video loop id="myVideo2" class="click-vid">
+            <source src="../stitched/DSCN2943_top_lease.mp4" type="video/mp4">
+        </video>
+    </body>
+
+    <script>
+        let videoElement = document.getElementById('myVideo1');
+        videoElement.load(); // Reload the video with the new source
+        videoElement.play(); // Start playing (optional)
+    </script>
+    <script>
+        let videoElement2 = document.getElementById('myVideo2');
+        videoElement2.load(); // Reload the video with the new source
+        videoElement2.play(); // Start playing (optional)
+    </script>
+</html>

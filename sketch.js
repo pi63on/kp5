@@ -173,7 +173,7 @@ function mousePressed() {
     let myAdder = currentPlace;
     document.getElementById('borderimage').src = 'images/' + myAdder + '.jpg';
     document.getElementById('imageText').innerHTML = locations[myAdder][0];
-    openCenteredPopup('videopage.html', 500, 400, 'myNewWindow', myAdder);
+    openCenteredPopup('video-pages/' + myAdder + '.html', 500, 400, 'myNewWindow', myAdder);
   }
 }
 

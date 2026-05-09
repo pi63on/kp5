@@ -4,11 +4,11 @@
         <link rel="stylesheet" href="video-style.css">
     </head>
     <body>
-        <video id="myVideo1" class="click-vid">
-            <source src="videos/double_shadow.mp4"  type="video/mp4">
+        <video loop id="myVideo1" class="click-vid">
+            <source src="../stitched/wiese sending.mp4"  type="video/mp4">
         </video>
-        <video id="myVideo2" class="click-vid">
-            <source src="videos/europenzia_zrkadlo.mp4" type="video/mp4">
+        <video loop id="myVideo2" class="click-vid">
+            <source src="../stitched/wiese receiving.mp4" type="video/mp4">
         </video>
     </body>
 
@@ -19,7 +19,6 @@
     </script>
     <script>
         let videoElement2 = document.getElementById('myVideo2');
-        // videoElement2.src = 'videos/europenzia_zrkadlo.mp4';
         videoElement2.load(); // Reload the video with the new source
         videoElement2.play(); // Start playing (optional)
     </script>
