@@ -92,6 +92,26 @@ let locations = [
     'cubus top lease',
     48.15312429910389,
     17.118201401645358
+  ],
+  [
+    'Bajkalska',
+    48.16432626784801,
+    17.13847427991539
+  ],
+  [
+    'Ruzinov podjazd',
+    48.15609829356522,
+    17.14542474834423
+  ],
+  [
+    'pristavny strom',
+    48.13998018565226,
+    17.150530838557597
+  ],
+  [
+    'terasa Petrzalka',
+    48.12671731305597,
+    17.12112133898056
   ]
 ]
 
@@ -122,14 +142,14 @@ function draw() {
 
     stroke('blue');
     drawPlace(myPoint.x, myPoint.y, place);
-    
+
     //checks if close to some point
     if (myDist < 30) {
       agent.applyForce(agent.seek(createVector(myPoint.x, myPoint.y))); // move marker
       currentPlace = i;
     }
   }
-  
+
   console.log(currentPlace);
   // floating marker behavior
   agent.checkEdges();

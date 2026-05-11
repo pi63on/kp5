@@ -36,6 +36,7 @@ class Mover {
 
     seek(target) {
         let desired = p5.Vector.sub(target, this.position);
+        this.velocity 
         desired.setMag(4);
 
         let steer = p5.Vector.sub(desired, this.velocity);
