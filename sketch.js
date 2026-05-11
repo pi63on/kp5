@@ -3,50 +3,6 @@ let canvas;
 let agent;
 let currentPlace;
 
-let places = [
-  {
-    name: "VŠVU Hviezdoslavovo námestie",
-    lat: 48.141737,
-    lng: 17.107255,
-  },
-  {
-    name: "Odraz v lúke",
-    lat: 48.1556,
-    lng: 17.0857,
-  },
-  {
-    name: "VŠVU Koceľova",
-    lat: 48.1542,
-    lng: 17.1318,
-  },
-  {
-    name: "Moja izba",
-    lat: 48.183736,
-    lng: 17.132237
-  },
-  {
-    name: 'bunt',
-    lat: 48.129502,
-    lng: 17.123586
-  },
-  {
-    name: 'cvicit',
-    lat: 48.144523,
-    lng: 17.102153
-  },
-  {
-    name: 'projektik',
-    lat: 48.137734,
-    lng: 17.117300
-  },
-  {
-    name: 'business',
-    lat: 48.150285,
-    lng: 17.109144
-  },
-
-];
-
 let locations = [
   [
     'odraz v luke',
@@ -129,6 +85,8 @@ function setup() {
   }).addTo(leafletMap);
 
   agent = new Mover(width / 2, height / 2);
+
+  textAlign(LEFT);
 }
 
 function draw() {
@@ -174,13 +132,15 @@ function drawPlace(x, y, place) {
   let r = 6;
 
   push();
-  stroke('blue')
-  noFill();
-  circle(x, y, r);
+    stroke('blue')
+    noFill();
+    circle(x, y, r);
 
-  noStroke(), fill('blue');
-  textSize(14);
-  text(place[0], x + 18, y - 10);
+    fill('blue');
+    stroke('white');
+    strokeWeight(10);
+    textSize(14);
+    text(place[0], x + 10 , y + 5 );
   pop();
 }
 

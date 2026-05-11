@@ -35,9 +35,15 @@ class Mover {
     }
 
     seek(target) {
+        let aRadius = 50;
+
         let desired = p5.Vector.sub(target, this.position);
-        this.velocity 
-        desired.setMag(4);
+        
+        if (desired.mag() <= aRadius){
+            desired.setMag(4* desired/aRadius);
+        } else {
+            desired.setMag(4);
+        }
 
         let steer = p5.Vector.sub(desired, this.velocity);
         steer.limit(0.15);
